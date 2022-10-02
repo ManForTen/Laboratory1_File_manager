@@ -1,3 +1,4 @@
+from settings import settings
 import os # Для создания папки
 import shutil # Для копирования файлов и папок
 
@@ -24,6 +25,9 @@ def copy_file(name, new_name):
     else: # Иначе копируем файл
         shutil.copy(name, new_name)
 
+def rename_file(name,new_name):
+    os.rename(name,new_name)
+
 
 def create_folder(name):
     try:
@@ -37,15 +41,24 @@ def get_list(folders_only = False):
         result = [f for f in result if os.path.isdir(f)]
     print(result)
 
+def replace_file(name,new_name):
+    os.replace(name,new_name)
+
+def what_directory():
+    print("Сейчас вы находитесь в данной директории:")
+    print(os.path.abspath(os.curdir))
+
+def go_up_directory():
+    os.chdir("..")
+    what_directory()
+
+def go_to_another_directory(name):
+    os.chdir(name)
+    what_directory()
+
 if __name__ == '__main__':
-    create_file('test1.txt')
-    create_file('test2.txt', 'Hello world!')
-    create_folder('new_f')
-    create_folder('new_f1')
+    print(os.path.abspath(os.curdir))
+    os.chdir("..")
     get_list()
-    get_list(True) # Только папки
-    delete_file('new_f')
-    delete_file('test1.txt')
-    copy_file('new_f1','new_f2')
-    create_file('test3.txt')
-    copy_file('test3.txt', 'test4.txt')
+
+    print(os.path.abspath(os.curdir))
