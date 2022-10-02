@@ -7,17 +7,20 @@ def create_file(name, text=None):
             f.write(text)
 
 def delete_file(name):
-    if os.path.isdir(name): # Если это папка удаляем её
-        os.rmdir(name)
-    else: # Иначе удаляем файл
-        os.remove(name)
+    try:
+        if os.path.isdir(name): # Если это папка удаляем её
+            os.rmdir(name)
+        else: # Иначе удаляем файл
+            os.remove(name)
+    except FileNotFoundError:
+        print('Данного файла не существует!')
 
 def copy_file(name, new_name):
     if os.path.isdir(name): # Если это папка, то копируем её
         try:
             shutil.copytree(name, new_name)
         except FileExistsError:
-            print('Даная папка уже существует!')
+            print('Данная папка уже существует!')
     else: # Иначе копируем файл
         shutil.copy(name, new_name)
 
@@ -26,7 +29,7 @@ def create_folder(name):
     try:
         os.mkdir(name)
     except FileExistsError:
-        print('Даная папка уже существует!')
+        print('Данная папка уже существует!')
 
 def get_list(folders_only = False):
     result = os.listdir()
