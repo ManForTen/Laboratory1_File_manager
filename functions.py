@@ -1,4 +1,3 @@
-from settings import settings
 import os # Для создания папки
 import shutil # Для копирования файлов и папок
 
@@ -55,10 +54,3 @@ def go_up_directory():
 def go_to_another_directory(name):
     os.chdir(name)
     what_directory()
-
-if __name__ == '__main__':
-    print(os.path.abspath(os.curdir))
-    os.chdir("..")
-    get_list()
-
-    print(os.path.abspath(os.curdir))
